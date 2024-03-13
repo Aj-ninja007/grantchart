@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gantt Chart Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* height: 100vh; */
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 7vh;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+   
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .task-inputs {
+            display: flex;
+            flex-direction: column;
+        }
+
+    </style>
+</head>
+<body>
+   
+    <form action="generate_chart.php" method="post">
+        <div class="task-inputs">
+            <label for="taskName">Task Name:</label>
+            <input type="text" name="taskName[]" required>
+
+            <label for="startDate">Start Date:</label>
+            <input type="date" name="startDate[]" required>
+
+            <label for="endDate">End Date:</label>
+            <input type="date" name="endDate[]" required>
+
+            <label for="dependency">Dependency (Optional):</label>
+            <input type="text" name="dependency[]">
+        </div>
+
+        <button type="button" onclick="addTask()">Add Task</button>
+        <button type="submit">Generate Gantt Chart</button>
+    </form>
+
+    <script>
+        function addTask() {
+            // Add new task input fields dynamically using JavaScript
+            const form = document.querySelector('form');
+            const taskInputs = document.createElement('div');
+            taskInputs.innerHTML = `
+                <label>Task Name:</label>
+                <input type="text" name="taskName[]" required>
+
+                <label>Start Date:</label>
+                <input type="date" name="startDate[]" required>
+
+                <label>End Date:</label>
+                <input type="date" name="endDate[]" required>
+
+                <label>Dependency (Optional):</label>
+                <input type="text" name="dependency[]">
+            `;
+            form.insertBefore(taskInputs, form.lastElementChild);
+        }
+    </script>
+</body>
+</html>
